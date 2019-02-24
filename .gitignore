@@ -27,10 +27,9 @@
 *.sbr
 *.sdf
 
-.vs/*
-bin/
+.vs/
 ipch/
-**/obj/
+obj/*
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
