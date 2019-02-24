@@ -27,10 +27,11 @@
 *.sbr
 *.sdf
 
-**/.vs/
+.vs/*
+bin/
 ipch/
 **/obj/
-**/[Bb]in
+[Bb]in
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
