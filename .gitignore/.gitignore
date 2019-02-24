@@ -26,6 +26,9 @@
 *.lib
 *.sbr
 *.sdf
+
+.vs/
+bin/
 ipch/
 obj/
 [Bb]in
