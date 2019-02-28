@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Brick_Breaker.Elements;
 using Brick_Breaker.Elements.Helpers;
 using Microsoft.Xna.Framework;
@@ -21,6 +23,7 @@ namespace Brick_Breaker
         public static int ScreenHeight;
         public static float DeltaTime;
         public static GraphicsDevice GraphicsDevice2;
+        private List<Brick> _brickList = new List<Brick>();
 
         public BrickBreaker()
         {
@@ -28,12 +31,6 @@ namespace Brick_Breaker
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
             GraphicsDevice2 = GraphicsDevice;
@@ -44,35 +41,30 @@ namespace Brick_Breaker
             _paddle = new Paddle();
             _ball = new Ball();
 
+            int spaceBetweenBricks = 3;
+            var position = new Vector2(0, spaceBetweenBricks);
+            var brickWidth = (ScreenWidth / 10) - spaceBetweenBricks;
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    _brickList.Add(new Brick(position, brickWidth, 20));
+                    position.X += _brickList[j].Texture.Width + spaceBetweenBricks;
+                }
+
+                position.X = 0;
+                position.Y += _brickList[i].Texture.Height + spaceBetweenBricks;
+            }
+
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -81,15 +73,11 @@ namespace Brick_Breaker
                 Exit();
 
             Controls.MouseControls(_paddle);
-            _ball.Update(_paddle);
-
+            _ball.Update(_paddle, _brickList);
+            
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -98,6 +86,11 @@ namespace Brick_Breaker
 
             _paddle.Draw(_spriteBatch);
             _ball.Draw(_spriteBatch);
+
+            foreach (var brick in _brickList.Where(x => !x.Destroyed))
+            {
+                brick.Draw(_spriteBatch);
+            }
 
             _spriteBatch.End();
 
