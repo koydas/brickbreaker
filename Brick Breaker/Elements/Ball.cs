@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Brick_Breaker.Elements.Helpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -17,7 +18,7 @@ namespace Brick_Breaker.Elements
         public Ball()
         {
             Glued = true;
-            _texture = GetTexture2D();
+            _texture = TextureHelper.CreateCircle(_radius);
             Position = new Vector2(1, BrickBreaker.ScreenHeight - 40);
         }
         
@@ -25,35 +26,6 @@ namespace Brick_Breaker.Elements
         {
             // We draw paddle in the bottom-middle of the screen
             spriteBatch.Draw(_texture, Position, Color.White);
-        }
-
-        private Texture2D GetTexture2D()
-        {
-            Texture2D texture = new Texture2D(BrickBreaker.GraphicsDevice2, _radius, _radius);
-            Color[] colorData = new Color[_radius * _radius];
-
-            float diam = _radius / 2f;
-            float diamsq = diam * diam;
-
-            for (int x = 0; x < _radius; x++)
-            {
-                for (int y = 0; y < _radius; y++)
-                {
-                    int index = x * _radius + y;
-                    Vector2 pos = new Vector2(x - diam, y - diam);
-                    if (pos.LengthSquared() <= diamsq)
-                    {
-                        colorData[index] = Color.White;
-                    }
-                    else
-                    {
-                        colorData[index] = Color.Transparent;
-                    }
-                }
-            }
-
-            texture.SetData(colorData);
-            return texture;
         }
 
         public void Update(Paddle paddle)
@@ -83,7 +55,7 @@ namespace Brick_Breaker.Elements
             }
 
             if (Position.Y + _radius > BrickBreaker.ScreenHeight - paddle.Height && // Hauteur
-                 (Position.X >= paddle.Position.X - paddle.Width/2 && Position.X <= paddle.Position.X + paddle.Width / 2)) // Largeur
+                 (Position.X >= paddle.Position.X && Position.X <= paddle.Position.X + paddle.Width)) // Largeur
             {
                 Velocity.Y *= -1;
             }

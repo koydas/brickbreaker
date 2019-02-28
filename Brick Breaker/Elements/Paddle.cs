@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Brick_Breaker.Elements.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,14 +13,13 @@ namespace Brick_Breaker.Elements
         public int Height = 20;
 
         private readonly Texture2D _texture;
-        
+
         private int _speed = 800;
-        
+
 
         public Paddle()
         {
-            _texture = new Texture2D(BrickBreaker.GraphicsDevice2, Width, Height);
-            SetTextureData();
+            _texture = TextureHelper.CreateSquare(Width, Height);
 
             // Initial position
             Position = new Vector2
@@ -73,15 +73,6 @@ namespace Brick_Breaker.Elements
         {
             // We draw paddle in the bottom-middle of the screen
             spriteBatch.Draw(_texture, Position, Color.White);
-        }
-
-        private void SetTextureData()
-        {
-            Color[] data = new Color[Width * Height]
-                .Select(x => x = Color.White)
-                .ToArray();
-            
-            _texture.SetData(data);
         }
     }
 }
