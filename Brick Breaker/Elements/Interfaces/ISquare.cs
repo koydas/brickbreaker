@@ -2,7 +2,7 @@
 
 namespace Brick_Breaker.Elements.Interfaces
 {
-    public interface ISquare : IPosition
+    public interface ISquare : IPosition, IDrawable
     {
         Texture2D Texture { get; set; }
 

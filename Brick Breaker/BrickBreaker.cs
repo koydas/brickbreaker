@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Brick_Breaker.Elements;
 using Brick_Breaker.Elements.Helpers;
+using Brick_Breaker.Levels;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Brick_Breaker
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
     public class BrickBreaker : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -22,7 +19,7 @@ namespace Brick_Breaker
         public static int ScreenWidth;
         public static int ScreenHeight;
         public static float DeltaTime;
-        public static GraphicsDevice GraphicsDevice2;
+        public static GraphicsDevice Graphics;
         private List<Brick> _brickList = new List<Brick>();
 
         public BrickBreaker()
@@ -33,7 +30,7 @@ namespace Brick_Breaker
 
         protected override void Initialize()
         {
-            GraphicsDevice2 = GraphicsDevice;
+            Graphics = GraphicsDevice;
 
             ScreenWidth = GraphicsDevice.PresentationParameters.Bounds.Width;
             ScreenHeight = GraphicsDevice.PresentationParameters.Bounds.Height;
@@ -41,21 +38,7 @@ namespace Brick_Breaker
             _paddle = new Paddle();
             _ball = new Ball();
 
-            int spaceBetweenBricks = 3;
-            var position = new Vector2(0, spaceBetweenBricks);
-            var brickWidth = (ScreenWidth / 10) - spaceBetweenBricks;
-
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    _brickList.Add(new Brick(position, brickWidth, 20));
-                    position.X += _brickList[j].Texture.Width + spaceBetweenBricks;
-                }
-
-                position.X = 0;
-                position.Y += _brickList[i].Texture.Height + spaceBetweenBricks;
-            }
+            _brickList = LevelHelper.GenerateLevel(5, 10);
 
             base.Initialize();
         }
@@ -87,10 +70,7 @@ namespace Brick_Breaker
             _paddle.Draw(_spriteBatch);
             _ball.Draw(_spriteBatch);
 
-            foreach (var brick in _brickList.Where(x => !x.Destroyed))
-            {
-                brick.Draw(_spriteBatch);
-            }
+            _spriteBatch.DrawLevel(_brickList);
 
             _spriteBatch.End();
 

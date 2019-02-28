@@ -8,7 +8,7 @@ namespace Brick_Breaker.Elements.Helpers
     {
         public static Texture2D CreateSquare(int width, int height)
         {
-            var texture = new Texture2D(BrickBreaker.GraphicsDevice2, width, height);
+            var texture = new Texture2D(BrickBreaker.Graphics, width, height);
             texture = SetSquareTextureData(texture, width, height);
 
             return texture;
@@ -16,7 +16,7 @@ namespace Brick_Breaker.Elements.Helpers
 
         public static Texture2D CreateCircle(int radius)
         {
-            Texture2D texture = new Texture2D(BrickBreaker.GraphicsDevice2, radius, radius);
+            Texture2D texture = new Texture2D(BrickBreaker.Graphics, radius, radius);
             texture = SetCircleTextureData(texture, radius);
 
             return texture;

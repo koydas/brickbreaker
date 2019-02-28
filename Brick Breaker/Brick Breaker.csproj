@@ -44,11 +44,15 @@
     <Compile Include="BrickBreaker.cs" />
     <Compile Include="Elements\Ball.cs" />
     <Compile Include="Elements\Brick.cs" />
-    <Compile Include="Elements\Helpers\Controls.cs" />
+    <Compile Include="Controls\Controls.cs" />
+    <Compile Include="Elements\Helpers\CollisionsHelper.cs" />
     <Compile Include="Elements\Helpers\TextureHelper.cs" />
+    <Compile Include="Elements\Interfaces\ICircle.cs" />
+    <Compile Include="Elements\Interfaces\IDrawable.cs" />
     <Compile Include="Elements\Interfaces\IPosition.cs" />
     <Compile Include="Elements\Interfaces\ISquare.cs" />
     <Compile Include="Elements\Paddle.cs" />
+    <Compile Include="Levels\LevelHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
