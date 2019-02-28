@@ -7,24 +7,24 @@ namespace Brick_Breaker.Elements
 {
     public class Paddle
     {
-        private readonly GraphicsDeviceManager _graphics;
+        public Vector2 Position;
+        public int Width = 80;
+        public int Height = 20;
+
         private readonly Texture2D _texture;
-
-        private Vector2 _position;
+        
         private int _speed = 800;
-        private int _width = 80;
-        private int _height = 20;
+        
 
-        public Paddle(BrickBreaker brickBreaker)
+        public Paddle()
         {
-
-            _texture = new Texture2D(BrickBreaker.GraphicsDevice2, _width, _height);
+            _texture = new Texture2D(BrickBreaker.GraphicsDevice2, Width, Height);
             SetTextureData();
 
             // Initial position
-            _position = new Vector2
+            Position = new Vector2
             {
-                X = BrickBreaker.ScreenWidth / 2 - _width / 2,
+                X = BrickBreaker.ScreenWidth / 2 - Width / 2,
                 Y = BrickBreaker.ScreenHeight - 20
             };
         }
@@ -51,33 +51,33 @@ namespace Brick_Breaker.Elements
                 mouseStateX = BrickBreaker.ScreenWidth - _texture.Width;
             }
 
-            _position.X = mouseStateX;
+            Position.X = mouseStateX;
         }
 
         private void KeyboardControls()
         {
             var keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.Left) && _position.X > 0)
+            if (keyboardState.IsKeyDown(Keys.Left) && Position.X > 0)
             {
-                _position.X -= _speed * BrickBreaker.DeltaTime; // todo : ajouter le deltatime
+                Position.X -= _speed * BrickBreaker.DeltaTime;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Right) && _position.X < BrickBreaker.ScreenWidth - _texture.Width)
+            if (keyboardState.IsKeyDown(Keys.Right) && Position.X < BrickBreaker.ScreenWidth - _texture.Width)
             {
-                _position.X += _speed * BrickBreaker.DeltaTime; // todo : ajouter le deltatime
+                Position.X += _speed * BrickBreaker.DeltaTime;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             // We draw paddle in the bottom-middle of the screen
-            spriteBatch.Draw(_texture, _position, Color.White);
+            spriteBatch.Draw(_texture, Position, Color.White);
         }
 
         private void SetTextureData()
         {
-            Color[] data = new Color[_width * _height]
+            Color[] data = new Color[Width * Height]
                 .Select(x => x = Color.White)
                 .ToArray();
             

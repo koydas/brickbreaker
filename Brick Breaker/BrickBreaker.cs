@@ -1,4 +1,5 @@
-﻿using Brick_Breaker.Elements;
+﻿using System;
+using Brick_Breaker.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,7 @@ namespace Brick_Breaker
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Paddle _paddle;
+        private Ball _ball;
 
         public static int ScreenWidth;
         public static int ScreenHeight;
@@ -38,7 +40,8 @@ namespace Brick_Breaker
             ScreenWidth = GraphicsDevice.PresentationParameters.Bounds.Width;
             ScreenHeight = GraphicsDevice.PresentationParameters.Bounds.Height;
 
-            _paddle = new Paddle(this);
+            _paddle = new Paddle();
+            _ball = new Ball();
 
             base.Initialize();
         }
@@ -76,9 +79,8 @@ namespace Brick_Breaker
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             _paddle.Controls();
+            _ball.Update(_paddle);
 
             base.Update(gameTime);
         }
@@ -97,6 +99,7 @@ namespace Brick_Breaker
             _spriteBatch.Begin();
 
             _paddle.Draw(_spriteBatch);
+            _ball.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
