@@ -1,20 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Brick_Breaker.Elements.Helpers;
+using Brick_Breaker.Elements.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Brick_Breaker.Elements
 {
-    public class Brick
+    public class Brick : ISquare
     {
-        public Vector2 Position;
-        public int Width = 80;
-        public int Height = 20;
-
-        private readonly Texture2D _texture;
+        public Vector2 Position { get; set; }
+        public Texture2D Texture { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public Brick(Vector2 position)
         {
-            //_texture = new Texture2D(BrickBreaker.GraphicsDevice2, Width, Height);
-            //SetTextureData();
+            Texture = TextureHelper.CreateSquare(Width, Height);
 
             Position = position;
         }

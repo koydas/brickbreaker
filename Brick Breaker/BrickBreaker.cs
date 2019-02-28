@@ -1,5 +1,6 @@
 ﻿using System;
 using Brick_Breaker.Elements;
+using Brick_Breaker.Elements.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -79,7 +80,7 @@ namespace Brick_Breaker
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _paddle.Controls();
+            Controls.MouseControls(_paddle);
             _ball.Update(_paddle);
 
             base.Update(gameTime);
@@ -93,9 +94,6 @@ namespace Brick_Breaker
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
-
-            // Pad
             _spriteBatch.Begin();
 
             _paddle.Draw(_spriteBatch);
