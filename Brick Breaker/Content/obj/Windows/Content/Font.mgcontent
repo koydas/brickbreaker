@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Dev/MonoGame/BrickBreaker2/brickbreaker/Brick Breaker/Content/Font.spritefont</SourceFile>
+  <SourceTime>2019-02-28T20:09:03.8973871-05:00</SourceTime>
+  <DestFile>C:/Dev/MonoGame/BrickBreaker2/brickbreaker/Brick Breaker/Content/bin/Windows/Content/Font.xnb</DestFile>
+  <DestTime>2019-02-28T20:09:05.3306488-05:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2018-12-08T11:35:54-05:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2018-12-08T11:35:54-05:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

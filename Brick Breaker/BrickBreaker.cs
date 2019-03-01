@@ -21,6 +21,7 @@ namespace Brick_Breaker
         public static float DeltaTime;
         public static GraphicsDevice Graphics;
         private List<Brick> _brickList = new List<Brick>();
+        private SpriteFont _font;
 
         public BrickBreaker()
         {
@@ -40,12 +41,16 @@ namespace Brick_Breaker
 
             _brickList = LevelHelper.GenerateLevel(5, 10);
 
+            ScoreSystem.Score = 0;
+            ScoreSystem.Position = new Vector2(10, BrickBreaker.ScreenHeight - 30);
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _font = Content.Load<SpriteFont>("Font");
         }
 
         protected override void Update(GameTime gameTime)
@@ -71,6 +76,7 @@ namespace Brick_Breaker
             _ball.Draw(_spriteBatch);
 
             _spriteBatch.DrawLevel(_brickList);
+            _spriteBatch.DrawString(_font, ScoreSystem.Score.ToString(), ScoreSystem.Position, Color.White);
 
             _spriteBatch.End();
 

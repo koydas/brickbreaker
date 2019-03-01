@@ -46,6 +46,7 @@
     <Compile Include="Elements\Brick.cs" />
     <Compile Include="Controls\Controls.cs" />
     <Compile Include="Elements\Helpers\CollisionsHelper.cs" />
+    <Compile Include="Elements\Helpers\ScoreSystem.cs" />
     <Compile Include="Elements\Helpers\TextureHelper.cs" />
     <Compile Include="Elements\Interfaces\ICircle.cs" />
     <Compile Include="Elements\Interfaces\IDrawable.cs" />

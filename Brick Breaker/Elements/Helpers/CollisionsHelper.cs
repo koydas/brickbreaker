@@ -13,6 +13,8 @@ namespace Brick_Breaker.Elements.Helpers
                 if (brick.Position.Y + brick.Height > ball.Position.Y &&
                     (ball.Position.X > brick.Position.X && ball.Position.X < brick.Position.X + brick.Width))
                 {
+                    ScoreSystem.BreakBrick();
+
                     brick.Destroyed = true;
                     ball.Velocity.Y *= -1;
 
@@ -69,6 +71,7 @@ namespace Brick_Breaker.Elements.Helpers
         {
             if (ball.Position.Y + ball.Radius > BrickBreaker.ScreenHeight)
             {
+                ScoreSystem.LoseBall();
                 ball.Glued = true;
             }
         }
